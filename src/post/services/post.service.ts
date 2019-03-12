@@ -19,4 +19,8 @@ export class PostService {
   getAll(): PostModel[] {
     return this.mockPosts;
   }
+
+  getById(id: string): PostModel | null {
+    return this.mockPosts.find(post => post.id === id) || null;
+  }
 }
