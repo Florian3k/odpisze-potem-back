@@ -1,6 +1,6 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param, NotFoundException } from '@nestjs/common';
 import { PostService } from '../services/post.service';
-import { GetAllPostsResponseDto } from '../dto';
+import { GetAllPostsResponseDto, GetPostResponseDto } from '../dto';
 
 @Controller('posts')
 export class PostController {
@@ -11,5 +11,14 @@ export class PostController {
     return {
       posts: this.postService.getAll(),
     };
+  }
+
+  @Get(':id')
+  getById(@Param('id') id: string): GetPostResponseDto {
+    const post = this.postService.getById(id);
+    if (!post) {
+      throw new NotFoundException('Post with given id does not exist');
+    }
+    return { post };
   }
 }
