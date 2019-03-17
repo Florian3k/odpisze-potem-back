@@ -13,3 +13,14 @@ services:
     ports:
       - "7777:7777"
     command: "npm run start:dev"
+
+  db:
+    image: postgres
+    environment: 
+      - POSTGRES_PASSWORD=example
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
