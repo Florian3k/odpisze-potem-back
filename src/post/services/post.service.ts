@@ -1,8 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { PostModel } from '../../models';
+import { Repository } from 'typeorm';
+import { PostEntity } from '../entities';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class PostService {
+  constructor(
+    @InjectRepository(PostEntity)
+    private readonly postRepository: Repository<PostEntity>,
+  ) {}
+
   private mockPosts: PostModel[] = [
     {
       id: 'a2bbd45b-f1e5-48ad-bcb7-b0a4e990196a',
