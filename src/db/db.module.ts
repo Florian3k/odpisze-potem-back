@@ -14,7 +14,7 @@ import { resolve } from 'path';
       database: process.env.POSTGRES_DB,
       synchronize: true,
       logging: false,
-      entities: ['src/**/*.entity.ts'],
+      entities: [process.env.TYPEORM_ENITIES as string],
       migrations: ['src/migration/**/*.ts'],
       subscribers: ['src/subscriber/**/*.ts'],
     }),
