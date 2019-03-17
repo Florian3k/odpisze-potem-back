@@ -10,7 +10,7 @@ services:
       - ./:/home/node/app
     ports:
       - "7777:7777"
-    command: "npm run start:dev"
+    command: "./wait-for-it.sh db:5432 -- npm run start:dev"
 
   db:
     image: postgres
