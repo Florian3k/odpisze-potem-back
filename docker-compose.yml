@@ -5,9 +5,7 @@ services:
     image: "node:11.10"
     user: "node"
     working_dir: /home/node/app
-    environment:
-      - PORT=7777
-      - NODE_ENV=development
+    env_file: ".env"
     volumes:
       - ./:/home/node/app
     ports:
@@ -16,8 +14,7 @@ services:
 
   db:
     image: postgres
-    environment: 
-      - POSTGRES_PASSWORD=example
+    env_file: ".env"
 
   adminer:
     image: adminer
