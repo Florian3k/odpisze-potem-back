@@ -7,15 +7,15 @@ export class PostController {
   constructor(private readonly postService: PostService) {}
 
   @Get()
-  getAll(): GetAllPostsResponseDto {
+  async getAll(): Promise<GetAllPostsResponseDto> {
     return {
-      posts: this.postService.getAll(),
+      posts: await this.postService.getAll(),
     };
   }
 
   @Get(':id')
-  getById(@Param('id') id: string): GetPostResponseDto {
-    const post = this.postService.getById(id);
+  async getById(@Param('id') id: string): Promise<GetPostResponseDto> {
+    const post = await this.postService.getById(id);
     if (!post) {
       throw new NotFoundException('Post with given id does not exist');
     }

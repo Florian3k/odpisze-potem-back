@@ -26,11 +26,15 @@ export class PostService {
     },
   ];
 
-  getAll(): PostModel[] {
-    return this.mockPosts;
+  async getAll(): Promise<PostModel[]> {
+    return this.postRepository.find();
   }
 
-  getById(id: string): PostModel | null {
-    return this.mockPosts.find(post => post.id === id) || null;
+  async getById(id: string): Promise<PostModel | null> {
+    try {
+      return (await this.postRepository.findOne(id)) || null;
+    } catch (error) {
+      return null;
+    }
   }
 }
