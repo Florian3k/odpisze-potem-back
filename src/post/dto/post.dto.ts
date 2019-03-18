@@ -1,5 +1,5 @@
 // tslint:disable: max-classes-per-file
-import { PostModel } from '../../models';
+import { PostModel } from '../models';
 
 export class GetAllPostsResponseDto {
   posts: PostModel[];
