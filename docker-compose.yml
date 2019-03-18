@@ -5,11 +5,19 @@ services:
     image: "node:11.10"
     user: "node"
     working_dir: /home/node/app
-    environment:
-      - PORT=7777
-      - NODE_ENV=development
+    env_file: ".env"
     volumes:
       - ./:/home/node/app
     ports:
       - "7777:7777"
-    command: "npm run start:dev"
+    command: "./wait-for-it.sh db:5432 -- npm run start:dev"
+
+  db:
+    image: postgres
+    env_file: ".env"
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
