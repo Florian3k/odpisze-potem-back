@@ -1,4 +1,6 @@
 // tslint:disable: max-classes-per-file
+import { UserModel } from '../models';
+
 export class RegisterUserRequestDto {
   nickname: string;
   email: string;
@@ -6,7 +8,5 @@ export class RegisterUserRequestDto {
 }
 
 export class RegisterUserResponseDto {
-  id: string;
-  nickname: string;
-  email: string;
+  user: UserModel;
 }

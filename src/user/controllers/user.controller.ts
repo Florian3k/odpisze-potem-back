@@ -16,6 +16,8 @@ export class UserController {
       registerUserDto.email,
     );
 
-    return { id, nickname, email };
+    return {
+      user: { id, nickname, email },
+    };
   }
 }
