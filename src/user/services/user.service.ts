@@ -39,4 +39,21 @@ export class UserService {
     } = await this.userRepository.save(createdUser);
     return newUser;
   }
+
+  async findByCredentials(
+    nickname: string,
+    password: string,
+  ): Promise<UserModel | null> {
+    const user = await this.userRepository.findOne({ where: { nickname } });
+    if (!user) {
+      return null;
+    }
+    const passwordMatches = await bcrypt.compare(password, user.password);
+    if (!passwordMatches) {
+      return null;
+    }
+    // tslint:disable-next-line: variable-name
+    const { password: _password, registeredAt, ...userModel } = user;
+    return userModel;
+  }
 }
