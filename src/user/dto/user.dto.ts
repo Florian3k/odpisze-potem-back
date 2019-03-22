@@ -10,3 +10,13 @@ export class RegisterUserRequestDto {
 export class RegisterUserResponseDto {
   user: UserModel;
 }
+
+export class LoginUserRequestDto {
+  nickname: string;
+  password: string;
+}
+
+export class LoginUserResponseDto {
+  user: UserModel;
+  token: string;
+}
