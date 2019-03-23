@@ -17,6 +17,7 @@ export class PostService {
 
   async getById(id: string): Promise<PostModel | null> {
     try {
+      // tslint:disable-next-line: strict-boolean-expressions
       return (await this.postRepository.findOne(id)) || null;
     } catch (error) {
       return null;
