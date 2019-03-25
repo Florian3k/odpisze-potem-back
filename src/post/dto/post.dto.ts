@@ -3,7 +3,10 @@ import { ApiModelProperty } from '@nestjs/swagger';
 import { PostModel } from '../models';
 
 export class GetAllPostsResponseDto {
-  @ApiModelProperty()
+  @ApiModelProperty({
+    isArray: true,
+    type: PostModel,
+  })
   posts: PostModel[];
 }
 
