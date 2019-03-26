@@ -3,7 +3,9 @@ import {
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
+  ManyToOne,
 } from 'typeorm';
+import { UserEntity } from '../../user/entities';
 
 @Entity()
 export class PostEntity {
@@ -18,4 +20,7 @@ export class PostEntity {
 
   @CreateDateColumn()
   createdAt: Date;
+
+  @ManyToOne(type => UserEntity, user => user.posts)
+  author: UserEntity;
 }
