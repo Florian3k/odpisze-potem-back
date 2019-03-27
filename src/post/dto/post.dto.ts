@@ -18,12 +18,15 @@ export class GetPostResponseDto {
 
 export class CreatePostRequestDto {
   @IsString()
+  @ApiModelProperty()
   title: string;
 
   @IsString()
+  @ApiModelProperty()
   content: string;
 }
 
 export class CreatePostResponseDto {
+  @ApiModelProperty()
   post: PostModel;
 }
