@@ -14,3 +14,12 @@ export class GetPostResponseDto {
   @ApiModelProperty()
   post?: PostModel;
 }
+
+export class CreatePostRequestDto {
+  title: string;
+  content: string;
+}
+
+export class CreatePostResponseDto {
+  post: PostModel;
+}
