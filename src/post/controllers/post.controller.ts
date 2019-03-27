@@ -1,7 +1,23 @@
-import { Controller, Get, Param, NotFoundException } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Param,
+  NotFoundException,
+  Body,
+  UseGuards,
+} from '@nestjs/common';
 import { PostService } from '../services/post.service';
-import { GetAllPostsResponseDto, GetPostResponseDto } from '../dto';
-import { ApiResponse } from '@nestjs/swagger';
+import {
+  GetAllPostsResponseDto,
+  GetPostResponseDto,
+  CreatePostRequestDto,
+  CreatePostResponseDto,
+} from '../dto';
+import { ApiResponse, ApiCreatedResponse } from '@nestjs/swagger';
+import { User } from '../../user/decorators/user.decorator';
+import { UserModel } from '../../user/models';
+import { AuthGuard } from '../../user/guards/auth.guard';
 
 @Controller('posts')
 export class PostController {
@@ -28,6 +44,21 @@ export class PostController {
     if (!post) {
       throw new NotFoundException('Post with given id does not exist');
     }
+    return { post };
+  }
+
+  @Post()
+  @UseGuards(AuthGuard)
+  @ApiCreatedResponse({ type: CreatePostRequestDto })
+  async create(
+    @Body() createPostDto: CreatePostRequestDto,
+    @User() user: UserModel,
+  ): Promise<CreatePostResponseDto> {
+    const post = await this.postService.create(
+      createPostDto.title,
+      createPostDto.content,
+      user,
+    );
     return { post };
   }
 }
