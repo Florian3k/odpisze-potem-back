@@ -5,9 +5,10 @@ import { PostService } from './services/post.service';
 import { PostEntity } from './entities';
 import { UserMiddleware } from '../user/middlewares/user.middleware';
 import { AuthService } from '../user/services/auth.service';
+import { UserEntity } from '../user/entities';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([PostEntity])],
+  imports: [TypeOrmModule.forFeature([PostEntity, UserEntity])],
   controllers: [PostController],
   providers: [PostService, AuthService],
 })
