@@ -8,8 +8,8 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import {
-  ApiResponse,
   ApiCreatedResponse,
+  ApiOkResponse,
   ApiBearerAuth,
 } from '@nestjs/swagger';
 
@@ -29,10 +29,7 @@ export class PostController {
   constructor(private readonly postService: PostService) {}
 
   @Get()
-  @ApiResponse({
-    type: GetAllPostsResponseDto,
-    status: 200,
-  })
+  @ApiOkResponse({ type: GetAllPostsResponseDto })
   async getAll(): Promise<GetAllPostsResponseDto> {
     return {
       posts: await this.postService.getAll(),
@@ -40,10 +37,7 @@ export class PostController {
   }
 
   @Get(':id')
-  @ApiResponse({
-    type: GetPostResponseDto,
-    status: 200,
-  })
+  @ApiOkResponse({ type: GetPostResponseDto })
   async getById(@Param('id') id: string): Promise<GetPostResponseDto> {
     const post = await this.postService.getById(id);
     if (!post) {
