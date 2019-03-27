@@ -48,7 +48,7 @@ export class PostController {
 
   @Post()
   @UseGuards(AuthGuard)
-  @ApiCreatedResponse({ type: CreatePostRequestDto })
+  @ApiCreatedResponse({ type: CreatePostResponseDto })
   @ApiBearerAuth()
   async create(
     @Body() createPostDto: CreatePostRequestDto,
