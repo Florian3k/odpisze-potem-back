@@ -1,7 +1,8 @@
 // tslint:disable: max-classes-per-file
-import { UserModel } from '../models';
-import { IsString, IsEmail, IsAlphanumeric, MinLength } from 'class-validator';
 import { ApiModelProperty } from '@nestjs/swagger';
+import { IsString, IsEmail, IsAlphanumeric, MinLength } from 'class-validator';
+
+import { UserModel } from '../models';
 
 export class RegisterUserRequestDto {
   @IsAlphanumeric()

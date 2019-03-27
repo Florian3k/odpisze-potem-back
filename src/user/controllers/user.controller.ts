@@ -2,15 +2,15 @@ import {
   Controller,
   Post,
   Body,
-  ForbiddenException,
   HttpCode,
   HttpStatus,
+  ForbiddenException,
 } from '@nestjs/common';
-import { ApiResponse } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiOkResponse } from '@nestjs/swagger';
 import { UserService } from '../services/user.service';
 import {
-  RegisterUserResponseDto,
   RegisterUserRequestDto,
+  RegisterUserResponseDto,
   LoginUserRequestDto,
   LoginUserResponseDto,
 } from '../dto';
@@ -25,10 +25,7 @@ export class UserController {
 
   @Post('register')
   @HttpCode(HttpStatus.CREATED)
-  @ApiResponse({
-    type: RegisterUserResponseDto,
-    status: 201,
-  })
+  @ApiCreatedResponse({ type: RegisterUserResponseDto })
   async register(
     @Body() registerUserDto: RegisterUserRequestDto,
   ): Promise<RegisterUserResponseDto> {
@@ -44,10 +41,7 @@ export class UserController {
   }
 
   @Post('/login')
-  @ApiResponse({
-    type: LoginUserResponseDto,
-    status: 200,
-  })
+  @ApiOkResponse({ type: LoginUserResponseDto })
   async login(
     @Body() loginUserDto: LoginUserRequestDto,
   ): Promise<LoginUserResponseDto> {
