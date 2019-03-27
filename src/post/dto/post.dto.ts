@@ -1,5 +1,6 @@
 // tslint:disable: max-classes-per-file
 import { ApiModelProperty } from '@nestjs/swagger';
+import { IsString } from 'class-validator';
 import { PostModel } from '../models';
 
 export class GetAllPostsResponseDto {
@@ -16,7 +17,10 @@ export class GetPostResponseDto {
 }
 
 export class CreatePostRequestDto {
+  @IsString()
   title: string;
+
+  @IsString()
   content: string;
 }
 
