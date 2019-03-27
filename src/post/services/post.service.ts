@@ -17,13 +17,20 @@ export class PostService {
   ) {}
 
   async getAll(): Promise<PostModel[]> {
-    return this.postRepository.find();
+    const posts = await this.postRepository.find({ relations: ['author'] });
+
+    return posts.map(({ author, ...rest }) => ({
+      ...rest,
+      author: author.nickname,
+    }));
   }
 
   async getById(id: string): Promise<PostModel | null> {
     try {
-      // tslint:disable-next-line: strict-boolean-expressions
-      return (await this.postRepository.findOne(id)) || null;
+      const { author, ...rest } = await this.postRepository.findOneOrFail(id, {
+        relations: ['author'],
+      });
+      return { ...rest, author: author.nickname };
     } catch (error) {
       return null;
     }
@@ -43,6 +50,6 @@ export class PostService {
     });
     const { author, ...post } = await this.postRepository.save(newPost);
 
-    return post;
+    return { ...post, author: author.nickname };
   }
 }
