@@ -3,21 +3,26 @@ import {
   Get,
   Post,
   Param,
-  NotFoundException,
   Body,
   UseGuards,
+  NotFoundException,
 } from '@nestjs/common';
-import { PostService } from '../services/post.service';
+import {
+  ApiResponse,
+  ApiCreatedResponse,
+  ApiBearerAuth,
+} from '@nestjs/swagger';
+
 import {
   GetAllPostsResponseDto,
   GetPostResponseDto,
   CreatePostRequestDto,
   CreatePostResponseDto,
 } from '../dto';
-import { ApiResponse, ApiCreatedResponse, ApiBearerAuth } from '@nestjs/swagger';
+import { PostService } from '../services/post.service';
+import { AuthGuard } from '../../user/guards/auth.guard';
 import { User } from '../../user/decorators/user.decorator';
 import { UserModel } from '../../user/models';
-import { AuthGuard } from '../../user/guards/auth.guard';
 
 @Controller('posts')
 export class PostController {

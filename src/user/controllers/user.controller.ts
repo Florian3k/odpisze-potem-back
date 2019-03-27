@@ -2,15 +2,15 @@ import {
   Controller,
   Post,
   Body,
-  ForbiddenException,
   HttpCode,
   HttpStatus,
+  ForbiddenException,
 } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse } from '@nestjs/swagger';
 import { UserService } from '../services/user.service';
 import {
-  RegisterUserResponseDto,
   RegisterUserRequestDto,
+  RegisterUserResponseDto,
   LoginUserRequestDto,
   LoginUserResponseDto,
 } from '../dto';
