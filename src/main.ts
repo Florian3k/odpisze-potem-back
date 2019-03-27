@@ -10,6 +10,7 @@ async function bootstrap() {
   const swaggerOptions = new DocumentBuilder()
     .setTitle('odpisze-potem api')
     .setVersion('0.0.1')
+    .addBearerAuth(process.env.TOKEN_HEADER_NAME, 'header')
     .build();
 
   const swaggerDocument = SwaggerModule.createDocument(app, swaggerOptions);

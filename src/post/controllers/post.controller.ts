@@ -14,7 +14,7 @@ import {
   CreatePostRequestDto,
   CreatePostResponseDto,
 } from '../dto';
-import { ApiResponse, ApiCreatedResponse } from '@nestjs/swagger';
+import { ApiResponse, ApiCreatedResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { User } from '../../user/decorators/user.decorator';
 import { UserModel } from '../../user/models';
 import { AuthGuard } from '../../user/guards/auth.guard';
@@ -50,6 +50,7 @@ export class PostController {
   @Post()
   @UseGuards(AuthGuard)
   @ApiCreatedResponse({ type: CreatePostRequestDto })
+  @ApiBearerAuth()
   async create(
     @Body() createPostDto: CreatePostRequestDto,
     @User() user: UserModel,
